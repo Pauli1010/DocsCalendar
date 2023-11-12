@@ -25,6 +25,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_12_160754) do
   create_table "slots", force: :cascade do |t|
     t.bigint "doctor_id", null: false
     t.bigint "user_id"
+    t.date "slot_date"
     t.datetime "start_time"
     t.datetime "end_time"
     t.string "occupancy", default: "open"

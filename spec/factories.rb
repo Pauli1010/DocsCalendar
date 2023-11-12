@@ -35,8 +35,8 @@ FactoryBot.define do
       }
     end
 
-    after(:create) do |doctor|
-      doctor.create_slots(Date.current - 2.days)
+    trait :no_working_days_summary do
+      working_days_summary { nil }
     end
   end
 end

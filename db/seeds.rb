@@ -8,3 +8,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+require 'factory_bot'
+
+3.times { FactoryBot.create(:user) }
+3.times { FactoryBot.create(:doctor) }

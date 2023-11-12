@@ -2,7 +2,8 @@
 
 RSpec.describe Doctor, type: :model do
   subject { described_class.new }
-  let(:doctor) { create(:doctor, name: doctor_name, specialization: doctor_spec) }
+  let!(:doctor) { create(:doctor, name: doctor_name, specialization: doctor_spec) }
+  let(:doctor_with_no_working_days_summary) { create(:doctor, :no_working_days_summary) }
   let(:doctor_name) { Faker::Name.name }
   let(:doctor_spec) { Doctor::SPECIALIZATION[rand(Doctor::SPECIALIZATION.length)] }
   let(:weekly_schedule) do
@@ -68,8 +69,26 @@ RSpec.describe Doctor, type: :model do
     it 'has default data' do
       expect(doctor.name).to eql doctor_name
       expect(doctor.specialization).to eql doctor_spec
-      # expect(doctor.working_days_summary).to eql weekly_schedule
       expect(doctor.working_days_summary_humanized).to eql weekly_schedule_humanized
+      expect(doctor.slots.count).to eql 3 * 3 * 2 # 3 days timex 3 slots a day times default 2 weeks
+    end
+  end
+
+  describe 'factory doctor without working_days_summary' do
+    it 'has no slots' do
+      expect(doctor_with_no_working_days_summary.name.present?).to be true
+      expect(doctor_with_no_working_days_summary.working_days_summary_humanized).to eql Hash.new
+      expect(doctor_with_no_working_days_summary.slots.count).to eql 0
+    end
+  end
+
+  describe '#create_slots' do
+    it 'does not create new slots if triggered with the same date as creation date' do
+      expect { doctor.create_slots }.not_to change { Slot.count }
+    end
+
+    it 'adds additional slots with date in the future' do
+      expect { doctor.create_slots(Date.current + 7.days) }.to change { Slot.count }.by(3 * 3)
     end
   end
 end

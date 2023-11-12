@@ -34,3 +34,4 @@
 
 # Ignore IDE files
 .idea/
+/config/credentials/development.key
