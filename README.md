@@ -61,3 +61,12 @@ or singular tests by providing line number:
 
 `rspec spec/models/user_spec.rb:52`
 
+## Using it locally
+
+To statr server locally run command:
+
+`bin/rails s`
+
+If you do not provide port number it will default to 3000 and you can make calls directly in browser or in Postman under:
+`http://[::1]:3000/api/v1/doctors/1`
+

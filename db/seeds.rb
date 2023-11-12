@@ -10,5 +10,7 @@
 
 require 'factory_bot'
 
+User.create(name: 'User One', email: 'user_one@example.com')
+
 3.times { FactoryBot.create(:user) }
 3.times { FactoryBot.create(:doctor) }

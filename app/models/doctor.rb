@@ -23,7 +23,8 @@ class Doctor < ApplicationRecord
             doctor: self,
             slot_date: start_date,
             start_time: s.first.to_datetime,
-            end_time: s.first.to_datetime
+            end_time: s.first.to_datetime,
+            occupancy: 'open'
           )
         end
       end
