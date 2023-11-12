@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project was created as a recruitment task, based on the description in `SWE_Candidate_Take_Home_Assessment.pdf` file
 
-Things you may want to cover:
+## Technical details
 
-* Ruby version
+### Ruby version
+3.1.3
 
-* System dependencies
+### System dependencies
 
-* Configuration
+## Configuration
 
-* Database creation
+### Database initialization
 
-* Database initialization
+### How to run the test suite
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
