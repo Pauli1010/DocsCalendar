@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'users/index'
+  get 'users/edit'
+  get 'users/update'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -19,12 +22,17 @@ Rails.application.routes.draw do
         end
       end
       # shortened routes
-      get :open_slots, controller_name: 'Api::V1::Slots', action: :index
-      post :reserve_slot, controller_name: 'Api::V1::Slots'
-      post :free, controller_name: 'Api::V1::Slots'
-      patch :update_slot, controller_name: 'Api::V1::Slots', action: :update
+      get :open_slots, to: 'slots#index'
+      post :reserve_slot, to: 'slots#reserve_slot'
+      post :free, to: 'slots#free'
+      patch :update_slot, to: 'slots#update'
       # user routes
-      get :my_slots, controller_name: 'Api::V1::Slots', action: :index
+      resources :users
+      get :my_data, to: 'users#my_data'
+      get :my_slots, to: 'slots#my_slots'
+      post 'registrations/create'
+      post 'sessions/create'
+      delete 'sessions/destroy'
     end
   end
 end

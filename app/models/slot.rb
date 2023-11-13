@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Slot < ApplicationRecord
-  enum occupancy: %w(open reserved vacation)
+  enum occupancy: { open: 'open', reserved: 'reserved', vacation: 'vacation' }
   belongs_to :doctor
   belongs_to :user, optional: true
 
@@ -12,7 +12,7 @@ class Slot < ApplicationRecord
   scope :by_user, -> (user_id) { where(user_id: user_id) }
 
   def reserve(current_user)
-    self.update_columns(user: current_user, occupancy: 'reserved')
+    self.update_columns(user_id: current_user.id, occupancy: 'reserved')
   end
 
   def free_up

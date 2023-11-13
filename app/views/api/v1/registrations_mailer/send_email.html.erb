@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+  <h1>Welcome <%= @user.email %>,</h1>
+  <p>
+    To obtain session token make an api call as POST: <%= @url %>, or click the link:
+    <a href="<%= @url %>">Magic link</a>
+  </p>
+</html>

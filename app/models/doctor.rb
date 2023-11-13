@@ -3,7 +3,7 @@
 class Doctor < ApplicationRecord
   SPECIALIZATION =  %w(cardiologist general_practitioner optitian pulmunologist) # Specializations dictionary simulation
   WEEK_DAYS = Date::DAYNAMES.rotate(1) # adjust to start from Monday
-  has_many :slots
+  has_many :slots, dependent: :destroy
 
   after_create :create_slots
 
