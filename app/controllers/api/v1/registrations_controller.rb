@@ -3,6 +3,7 @@
 class Api::V1::RegistrationsController < ApplicationController
   def create
     user = User.find_or_create_by!(email: params[:user_email])
+    p user
     user.update!(login_token: SecureRandom.urlsafe_base64,
                  login_token_valid_until: Time.now + 60.minutes)
 

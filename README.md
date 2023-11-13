@@ -1,15 +1,13 @@
 # README
 
-This project was created as a recruitment task, based on the description in `SWE_Candidate_Take_Home_Assessment.pdf` file.
+This project was created based on the description in `SWE_Candidate_Take_Home_Assessment.pdf` file.
 
-Additional information about data models and code flow is provided in file: `---`
+Additional information about data models and code flow is provided in file: `thought_process.md`
 
 ## Technical details
 
 ### Ruby version
 3.1.3
-
-### System dependencies
 
 ## Configuration
 Below are all the needed steps to launch app locally.

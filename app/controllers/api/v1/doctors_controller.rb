@@ -8,7 +8,12 @@ class Api::V1::DoctorsController < ApplicationController
 
   def show
     @doctor = doctors.find_by(id: params[:id])
-    render json: @doctor
+
+    if @doctor
+      render json: { doctor: { id: @doctor.id, name: @doctor.name, specialization: @doctor.specialization, schedule: @doctor.working_days_summary_humanized, open_slots: @doctor.slots.open_slots } }
+    else
+      render json: { doctor: [], message: 'Couldn\'t find data' }
+    end
   end
 
   def update

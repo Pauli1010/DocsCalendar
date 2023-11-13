@@ -8,5 +8,5 @@ class User < ApplicationRecord
            class_name: "Slot",
            dependent: :nullify
 
-  validates :email, uniqueness: true
+  validates :email, uniqueness: true, on: :create
 end
