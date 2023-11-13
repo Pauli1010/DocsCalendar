@@ -70,7 +70,16 @@ RSpec.describe Doctor, type: :model do
       expect(doctor.name).to eql doctor_name
       expect(doctor.specialization).to eql doctor_spec
       expect(doctor.working_days_summary_humanized).to eql weekly_schedule_humanized
-      expect(doctor.slots.count).to eql 3 * 3 * 2 # 3 days timex 3 slots a day times default 2 weeks
+      # 3 days times 3 slots a day times default 2 weeks
+      # if today is one of days in schedule we need to add 3 more slots
+      # For example if today is Monday we have it as current and two more withing range
+      #   expect([(3 * 3 * 2), ( (3 * 3 * 2) + 3)].include?(doctor.slots.count)).to be true
+      # Test can be divided in two cases: Today is within working_days_summary or not
+      if doctor.working_days.include?((Date::DAYNAMES[Date.current.cwday]))
+        expect(doctor.slots.count).to eql ((3 * 3 * 2) + 3)
+      else
+        expect(doctor.slots.count).to eql (3 * 3 * 2)
+      end
     end
   end
 

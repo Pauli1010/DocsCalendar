@@ -16,7 +16,7 @@ class Slot < ApplicationRecord
   end
 
   def free_up
-    self.update_columns(user: nil, occupancy: 'open')
+    self.update_columns(user_id: nil, occupancy: 'open')
   end
 
   def add_message(message)

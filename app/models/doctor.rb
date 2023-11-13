@@ -3,6 +3,7 @@
 class Doctor < ApplicationRecord
   SPECIALIZATION =  %w(cardiologist general_practitioner optitian pulmunologist) # Specializations dictionary simulation
   WEEK_DAYS = Date::DAYNAMES.rotate(1) # adjust to start from Monday
+
   has_many :slots, dependent: :destroy
 
   after_create :create_slots
@@ -14,9 +15,8 @@ class Doctor < ApplicationRecord
     return if working_days.none?
 
     stop_date = start_date + 14.days
-
     while start_date <= stop_date do
-      if working_days.include?(Date::DAYNAMES[start_date.cwday]) && slots.slots_for_day(start_date).none?
+      if working_days.include?(Date::DAYNAMES[start_date.cwday]) && slots.by_date(start_date).none?
         weekday = Date::DAYNAMES[start_date.cwday]
         working_days_summary.dig(weekday, 'slots').each do |s|
           slots.create(
@@ -31,7 +31,6 @@ class Doctor < ApplicationRecord
 
       start_date += 1.day
     end
-
   end
 
   def working_days

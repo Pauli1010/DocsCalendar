@@ -4,6 +4,11 @@ FactoryBot.define do
   factory(:user, class: 'User') do
     name { Faker::Name.name }
     email { Faker::Internet.email }
+
+    trait :admin do
+      name { 'Admin' }
+      admin { true }
+    end
   end
 
   factory(:doctor, class: 'Doctor') do
